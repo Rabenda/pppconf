@@ -10,4 +10,4 @@ Run pppconf and answer to questions.
 For connect type pppconf -connect
 
 # License
-This programm is licensed under GNU GPL license
+This program is licensed under GNU GPL license
