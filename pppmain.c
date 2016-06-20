@@ -28,7 +28,7 @@
  * You need at least ethernet card and your ISP using PPPoE method to connect clients to internet
  * Warning: This program not running DHCP! 
  * How to configure your PPPoE connection? Simply execute command "pppcfg"
- * How to connect to internet using your configured PPPoE connection? Simply execute command "pppcfg -connect"
+ * How to connect to internet using your configured PPPoE connection? Simply execute command "pppconf -connect"
  */
 
 #include "ppp.h"
@@ -84,36 +84,51 @@ int main(int argc, char **argv)
 		}
 	}
 	
-	char usrname[maxCharBuffer];
-	char usrpswd[maxCharBuffer];
-	char ethadapter[maxCharBuffer];
-	printString(stringEnterYourUserName);
-	getInput(usrname);
-	printString(stringEnterYourPassword);
-	getInput(usrpswd);
-	printString(stringEnterEthAdapter);
-	getInput(ethadapter);
-	printString(stringIsConfigurationCorrect);
-	printf(stringUserName, usrname, "\n");
-	printf(stringUserPassword, usrpswd, "\n");
-	printf(stringEthernetAdapter, ethadapter, "\n");
-	getInput(inp);
-	if(strcmp(inp, stringYes) == succeful)
+// Label
+	configuration:
 	{
-		int result = ConfigurePPP(usrname, usrpswd, ethadapter);
-		if(result == succeful)
+		char usrname[maxCharBuffer];
+		char usrpswd[maxCharBuffer];
+		char ethadapter[maxCharBuffer];
+		printString(stringEnterYourUserName);
+		getInput(usrname);
+		printString(stringEnterYourPassword);
+		getInput(usrpswd);
+		printString(stringEnterEthAdapter);
+		getInput(ethadapter);
+		isConfigCorrect:
 		{
-	        printString(stringSuccess);
-	        return 0;
-		}
-		if(result == unsucceful)
-		{
-			printString(stringUnsuccess);
-			return 0;
-		}
-	}
+			printString(stringIsConfigurationCorrect);
+			printf(stringUserName, usrname, "\n");
+			printf(stringUserPassword, usrpswd, "\n");
+			printf(stringEthernetAdapter, ethadapter, "\n");
+			getInput(inp);
+			if(strcmp(inp, stringYes) == succeful)
+			{
+				int result = ConfigurePPP(usrname, usrpswd, ethadapter);
+				if(result == succeful)
+				{
+					printString(stringSuccess);
+					return 0;
+				}
+				if(result == unsucceful)
+				{
+					printString(stringUnsuccess);
+					return 0;
+				}	
+			}
 	
-	return 0;
+	
+		if(strcmp(inp, stringNo) == succeful)
+		{
+			goto configuration;
+		}
+		
+		// If not yes and no no
+		goto isConfigCorrect;
+	}
+}
+  return 0;
 }
 
 void printString(string str)

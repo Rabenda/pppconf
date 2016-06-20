@@ -52,7 +52,7 @@ const int maxCharBuffer = 255; // Max chars count in string buffer
 const string pathPPP = "/etc/ppp";
 const string pathPPPConfig = "/etc/ppp/ppp.conf";
 // And some strings
-const string stringWelcome = "pppconf - FreeBSD PPPoE connection utility v1.0";
+const string stringWelcome = "pppconf - FreeBSD PPPoE connection utility v1.1. Build date: 20.06.16";
 const string stringCopy = "(C)2016 Bogdan Nikolaev. This program is licensed under GNU GPL license";
 const string stringPPPDirNotFound = "Directory /etc/ppp not exists, create it? Y/N";
 const string stringDirNotFound = "Directory /etc/ppp not exists. Program terminated";
